@@ -22028,7 +22028,7 @@ export const STAGING_DOCUMENTS: readonly MappingDocument[] = [
       config_revision: 1,
       generator: "idl-src-gen@7c831ee6c4732a5ee4151346ae6590485919558c",
       source_idl:
-        "glam managed anchor_v1/idls/external/jupiter_lending (revision 9d233f1bc302, idl fe9ba7063fcb)",
+        "glam managed anchor_v1/idls/external/jupiter_lending (revision 937cdf101e8f, idl fe9ba7063fcb)",
       proxy_idl:
         "glam managed anchor_v1/idls/glam/ext_jupiter_staging (revision a4255f99547c, idl f424fb73040c)",
     },
@@ -23007,7 +23007,7 @@ export const STAGING_DOCUMENTS: readonly MappingDocument[] = [
       config_revision: 1,
       generator: "idl-src-gen@7c831ee6c4732a5ee4151346ae6590485919558c",
       source_idl:
-        "glam managed anchor_v1/idls/external/jupiter_vaults (revision a349f3da803a, idl b2ba95b281e1)",
+        "glam managed anchor_v1/idls/external/jupiter_vaults (revision 310e40594bbb, idl b2ba95b281e1)",
       proxy_idl:
         "glam managed anchor_v1/idls/glam/ext_jupiter_staging (revision a4255f99547c, idl f424fb73040c)",
     },
