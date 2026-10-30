@@ -5,7 +5,7 @@
   "homepage": "https://www.glam.systems",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glamsystems/ix-mapper-ts.git"
+    "url": "git+https://github.com/glamsystems/ix-mapper-ts-legacy.git"
   },
   "keywords": [
     "glam",
