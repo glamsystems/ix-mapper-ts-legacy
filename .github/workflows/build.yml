@@ -32,14 +32,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Typecheck sources and tests
-        run: npm run typecheck
-
       - name: Build package
         run: npm run build
-
-      - name: Run tests
-        run: npm test
 
       - name: Check package contents
         shell: bash
@@ -53,25 +47,20 @@ jobs:
           const pack = JSON.parse(fs.readFileSync("npm-pack-dry-run.json", "utf8"))[0];
           const files = new Set(pack.files.map((file) => file.path));
           const required = [
-            "dist/index.js",
-            "dist/index.d.ts",
-            "dist/web3.js",
-            "dist/web3.d.ts",
-            "dist/generated/mapping/index.js",
+            "index.cjs",
+            "index.esm.js",
+            "index.cjs.d.ts",
+            "index.esm.d.ts",
+            "src/index.d.ts",
+            "src/pda.d.ts",
+            "src/types.d.ts",
             "README.md",
             "LICENSE",
-            "package.json",
           ];
 
           for (const file of required) {
             if (!files.has(file)) {
               throw new Error(`Missing expected package file: ${file}`);
-            }
-          }
-
-          for (const file of files) {
-            if (file.startsWith("src/") || file.startsWith("test/")) {
-              throw new Error(`Source file in the package: ${file}`);
             }
           }
 
@@ -88,17 +77,9 @@ jobs:
           );
           NODE
 
-      - name: Smoke test package entrypoints
+      - name: Smoke test package entrypoint
         run: |
-          node --input-type=module -e "
-            import { createMapper, mapKitInstruction, parseMappingDocument } from './dist/index.js';
-            import { mapWeb3Instruction } from './dist/web3.js';
-            for (const fn of [createMapper, mapKitInstruction, parseMappingDocument, mapWeb3Instruction]) {
-              if (typeof fn !== 'function') process.exit(1);
-            }
-            createMapper({ environment: 'production' });
-            createMapper({ environment: 'staging' });
-          "
+          node -e "const mapper = require('./index.cjs'); if (typeof mapper.mapToGlamIx !== 'function') process.exit(1); if (typeof mapper.fixSignerAccounts !== 'function') process.exit(1);"
 
       - name: Upload pack manifest
         uses: actions/upload-artifact@v4

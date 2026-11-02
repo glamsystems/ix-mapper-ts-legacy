@@ -32,9 +32,7 @@ jobs:
           cache: "npm"
 
       - name: Use npm with trusted publishing support
-        # npm 12.0.0 installs sigstore under the workspace copy of libnpmpublish,
-        # but npm publish --provenance loads the runtime copy and fails to resolve it.
-        run: npm install -g npm@11.18.0
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm ci
